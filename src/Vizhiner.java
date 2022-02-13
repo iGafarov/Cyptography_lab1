@@ -1,10 +1,12 @@
+import utils.Constants;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class Vizhiner {
 
-    Character[][] vizhinerTable = getVizhinerTable(Constants.ALPHABET);
+    Character[][] vizhinerTable = getVizhinerTable(Constants.ALPHABET_ENG);
 
     public String decryptText(String toDecryptText, String key) {
 

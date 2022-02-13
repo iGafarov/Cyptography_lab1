@@ -1,6 +1,13 @@
+import utils.Constants;
+import utils.InputParametersPattern;
+import utils.ParametersValidator;
+
+import java.util.Map;
+
 public class Main {
 
     public static void main(String[] args) {
+        Map<InputParametersPattern, String> parameters = ParametersValidator.validateInputParameters(args);
         System.out.println("Original text: " + Constants.TEXT);
         System.out.println("Key " + Constants.KEY
                             + "\n===================================");

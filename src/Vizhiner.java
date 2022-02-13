@@ -49,22 +49,26 @@ public class Vizhiner {
     private Character findCharInTableEncrypt(Character stroka, Character stolbec) {
         int indexStroka = 0;
         int indexStolbec = 0;
+
         for (int i = 0; i < vizhinerTable.length; ++i) {
             if (vizhinerTable[0][i].equals(stroka)) indexStroka = i;
             if (vizhinerTable[0][i].equals(stolbec)) indexStolbec = i;
         }
+
         return vizhinerTable[indexStroka][indexStolbec];
     }
 
     private Character findCharInTableDecrypt(Character letter, Character stolbec) {
         int indexStroka = 0;
         int indexStolbec = 0;
+
         for (int i = 0; i < vizhinerTable.length; ++i) {
             if (vizhinerTable[0][i].equals(stolbec)) indexStolbec = i;
         }
         for (int j = 0; j < vizhinerTable.length; ++j) {
             if (vizhinerTable[j][indexStolbec].equals(letter)) indexStroka = j;
         }
+
         return vizhinerTable[0][indexStroka];
     }
 
@@ -72,11 +76,13 @@ public class Vizhiner {
         int size = alphabet.length;
         Character[][] resultTable = new Character[size][size];
         List<Character> str = Arrays.asList(alphabet);
+
         for (int i = 0; i < size; ++i) {
             System.out.println(str);
             resultTable[i] = (Character[]) str.toArray();
             Collections.rotate(str, -1);
         }
+
         return resultTable;
     }
 }

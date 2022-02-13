@@ -13,7 +13,7 @@ public class ParametersValidator {
     public static Map<InputParametersPattern, String> validateInputParameters(String []args) {
         Map<InputParametersPattern,String> parameters = parseInputParameters(args);
         validateInputParameters(parameters);
-        return  parameters;
+        return parameters;
     }
 
     private static Map<InputParametersPattern, String> parseInputParameters(String []args) {
@@ -51,13 +51,18 @@ public class ParametersValidator {
             throw new IllegalArgumentException("Parameter '-input_text' is required");
         }
         else if (!(checkTxtFile(parameters.get(InputParametersPattern.INPUT_TEXT)))) {
-            throw new IllegalArgumentException("Parameters '-input_text' and '-result_text' must be .txt files");
+            throw new IllegalArgumentException("Parameter '-input_text' and '-result_text' must be .txt files");
         }
         if (!(parameters.containsKey(InputParametersPattern.RESULT_TEXT))) {
             throw new IllegalArgumentException("Parameter '-result_text' is required");
         }
         else if (!(checkTxtFile(parameters.get(InputParametersPattern.RESULT_TEXT)))) {
-            throw new IllegalArgumentException("Parameters '-input_text' and '-result_text' must be .txt files");
+            throw new IllegalArgumentException("Parameter '-input_text' and '-result_text' must be .txt files");
+        }
+        if (!(parameters.containsKey(InputParametersPattern.KEY))) {
+            if (!(checkTxtFile(parameters.get(InputParametersPattern.KEY)))) {
+                throw new IllegalArgumentException("Parameter '-key' must be .txt file");
+            }
         }
     }
 

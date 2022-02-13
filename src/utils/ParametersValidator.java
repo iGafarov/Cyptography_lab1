@@ -44,7 +44,7 @@ public class ParametersValidator {
             throw new IllegalArgumentException("Parameter '-alphabet' is required");
         }
         else if (!(parameters.get(InputParametersPattern.ALPHABET).equals(Constants.RUS))
-                || !(parameters.get(InputParametersPattern.ALPHABET).equals(Constants.ENG))) {
+                && !(parameters.get(InputParametersPattern.ALPHABET).equals(Constants.ENG))) {
             throw new IllegalArgumentException("Parameter '-alphabet' must take the value 'eng' or 'rus'");
         }
         if (!(parameters.containsKey(InputParametersPattern.INPUT_TEXT))) {
@@ -56,9 +56,6 @@ public class ParametersValidator {
         if (!(parameters.containsKey(InputParametersPattern.RESULT_TEXT))) {
             throw new IllegalArgumentException("Parameter '-result_text' is required");
         }
-        else if (!(checkTxtFile(parameters.get(InputParametersPattern.RESULT_TEXT)))) {
-            throw new IllegalArgumentException("Parameter '-input_text' and '-result_text' must be .txt files");
-        }
         if (!(parameters.containsKey(InputParametersPattern.KEY))) {
             if (!(checkTxtFile(parameters.get(InputParametersPattern.KEY)))) {
                 throw new IllegalArgumentException("Parameter '-key' must be .txt file");
@@ -68,8 +65,13 @@ public class ParametersValidator {
 
     private static boolean checkTxtFile(String pathToTxtFile) {
         File file = new File(pathToTxtFile);
-        Pattern pattern = Pattern.compile(REGEX_TXT_FILE);
-        Matcher matcher = pattern.matcher(file.getName());
-        return matcher.find();
+        if (file.exists()) {
+            Pattern pattern = Pattern.compile(REGEX_TXT_FILE);
+            Matcher matcher = pattern.matcher(file.getName());
+            return matcher.find();
+        }
+        else {
+            throw new IllegalArgumentException("File must exists on your PC");
+        }
     }
 }

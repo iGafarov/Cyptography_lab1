@@ -1,5 +1,6 @@
 package vizhiner.impl;
 
+import utils.FileService;
 import utils.InputParametersPattern;
 import vizhiner.Algorithm;
 
@@ -9,10 +10,12 @@ public class EncryptVizhiner implements Algorithm {
 
     private final Map<InputParametersPattern, String> parameters;
     private final Character[][] vizhinerTable;
+    private final String toEncryptText;
 
     public EncryptVizhiner(Map<InputParametersPattern, String> parameters) {
         this.parameters = parameters;
         this.vizhinerTable = getVizhinerTable(parameters.get(InputParametersPattern.ALPHABET));
+        this.toEncryptText = FileService.readFile(parameters.get(InputParametersPattern.INPUT_TEXT));
     }
 
     @Override

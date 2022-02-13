@@ -7,9 +7,9 @@ import java.util.Collections;
 import java.util.List;
 
 public interface Algorithm {
-    public void execute();
+    void execute();
 
-    public Character findCharInTable(Character str, Character column);
+    Character findCharInTable(Character str, Character column);
 
     default Character[][] getVizhinerTable(String language) {
         Character[] alphabet;

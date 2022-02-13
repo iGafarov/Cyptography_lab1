@@ -25,13 +25,19 @@ public class DecryptVizhiner implements Algorithm {
         int indexString = 0;
         int indexColumn = 0;
 
+        Character letterTmp = Character.toUpperCase(letter);
         for (int i = 0; i < vizhinerTable.length; ++i) {
             if (vizhinerTable[0][i].equals(column)) indexColumn = i;
         }
         for (int j = 0; j < vizhinerTable.length; ++j) {
-            if (vizhinerTable[j][indexColumn].equals(letter)) indexString = j;
+            if (vizhinerTable[j][indexColumn].equals(letterTmp)) indexString = j;
         }
 
-        return vizhinerTable[0][indexString];
+        if (Character.isLowerCase(letter)) {
+            return Character.toLowerCase(vizhinerTable[0][indexString]);
+        }
+        else {
+            return vizhinerTable[0][indexString];
+        }
     }
 }

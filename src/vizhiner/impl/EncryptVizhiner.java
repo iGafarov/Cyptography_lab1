@@ -25,11 +25,17 @@ public class EncryptVizhiner implements Algorithm {
         int indexString = 0;
         int indexColumn = 0;
 
+        Character strTmp = Character.toUpperCase(str);
         for (int i = 0; i < vizhinerTable.length; ++i) {
-            if (vizhinerTable[0][i].equals(str)) indexString = i;
+            if (vizhinerTable[0][i].equals(strTmp)) indexString = i;
             if (vizhinerTable[0][i].equals(column)) indexColumn = i;
         }
 
-        return vizhinerTable[indexString][indexColumn];
+        if (Character.isLowerCase(str)) {
+            return Character.toLowerCase(vizhinerTable[indexString][indexColumn]);
+        }
+        else {
+            return vizhinerTable[indexString][indexColumn];
+        }
     }
 }

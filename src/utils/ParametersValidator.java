@@ -56,7 +56,7 @@ public class ParametersValidator {
         if (!(parameters.containsKey(InputParametersPattern.RESULT_TEXT))) {
             throw new IllegalArgumentException("Parameter '-result_text' is required");
         }
-        if (!(parameters.containsKey(InputParametersPattern.KEY))) {
+        if (parameters.containsKey(InputParametersPattern.KEY)) {
             if (!(checkTxtFile(parameters.get(InputParametersPattern.KEY)))) {
                 throw new IllegalArgumentException("Parameter '-key' must be .txt file");
             }

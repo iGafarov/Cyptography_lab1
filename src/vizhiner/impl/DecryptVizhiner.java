@@ -40,7 +40,6 @@ public class DecryptVizhiner implements Algorithm {
         FileService.createFile(parameters.get(InputParametersPattern.RESULT_TEXT), sb.toString());
     }
 
-    //TODO обработка пробелов
     @Override
     public Character findCharInTable(Character letter, Character column) {
         if (letter.equals(' ') || letter.equals('\n')) {
@@ -52,7 +51,7 @@ public class DecryptVizhiner implements Algorithm {
 
         Character letterTmp = Character.toUpperCase(letter);
         for (int i = 0; i < vizhinerTable.length; ++i) {
-            if (vizhinerTable[0][i].equals(column)) indexColumn = i;
+            if (vizhinerTable[0][i].equals(Character.toUpperCase(column))) indexColumn = i;
         }
         for (int j = 0; j < vizhinerTable.length; ++j) {
             if (vizhinerTable[j][indexColumn].equals(letterTmp)) indexString = j;
@@ -60,7 +59,8 @@ public class DecryptVizhiner implements Algorithm {
 
         if (Character.isLowerCase(letter)) {
             return Character.toLowerCase(vizhinerTable[0][indexString]);
-        } else {
+        }
+        else {
             return vizhinerTable[0][indexString];
         }
 

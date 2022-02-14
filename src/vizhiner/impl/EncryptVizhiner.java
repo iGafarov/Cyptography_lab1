@@ -36,6 +36,7 @@ public class EncryptVizhiner implements Algorithm {
         Character[] originalText = toEncryptText.chars()
                 .mapToObj(i -> (char) i).toArray(Character[]::new);
         Character[] encryptedText = new Character[originalText.length];
+
         int j = 0;
         for (int i = 0; i < toEncryptText.length(); ++i) {
             if (originalText[i].equals(' ') || originalText[i].equals('\n')) {
@@ -58,10 +59,6 @@ public class EncryptVizhiner implements Algorithm {
 
     @Override
     public Character findCharInTable(Character str, Character column) {
-       /* if (str.equals(' ') || str.equals('\n')) {
-            return str;
-        }*/
-
         int indexString = 0;
         int indexColumn = 0;
 

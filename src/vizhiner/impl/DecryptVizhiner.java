@@ -28,8 +28,15 @@ public class DecryptVizhiner implements Algorithm {
                 .mapToObj(i -> (char) i).toArray(Character[]::new);
         Character[] decryptedText = new Character[originalText.length];
 
+        int j = 0;
         for (int i = 0; i < toDecryptText.length(); ++i) {
-            decryptedText[i] = findCharInTable(originalText[i], keyArr[i]);
+            if (originalText[i].equals(' ') || originalText[i].equals('\n')) {
+                decryptedText[i] = originalText[i];
+                ++j;
+            }
+            else {
+                decryptedText[i] = findCharInTable(originalText[i], keyArr[i - j]);
+            }
         }
 
         StringBuilder sb = new StringBuilder();
@@ -42,10 +49,6 @@ public class DecryptVizhiner implements Algorithm {
 
     @Override
     public Character findCharInTable(Character letter, Character column) {
-        if (letter.equals(' ') || letter.equals('\n')) {
-            return letter;
-        }
-
         int indexString = 0;
         int indexColumn = 0;
 
@@ -59,8 +62,7 @@ public class DecryptVizhiner implements Algorithm {
 
         if (Character.isLowerCase(letter)) {
             return Character.toLowerCase(vizhinerTable[0][indexString]);
-        }
-        else {
+        } else {
             return vizhinerTable[0][indexString];
         }
 

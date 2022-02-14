@@ -28,15 +28,23 @@ public class EncryptVizhiner implements Algorithm {
             sb.append('A'); // English 'A' (65)
         else
             sb.append('А'); // Russian 'A' (1040)
-        String keyString = sb.append(toEncryptText, 0, toEncryptText.length() - 1).toString();
+        String keyString = sb.append(toEncryptText, 0, toEncryptText.length() - 1).toString()
+                .replace(" ", "")
+                .replace("\n", "");
         Character[] keyArr = keyString.chars()
                 .mapToObj(i -> (char) i).toArray(Character[]::new);
         Character[] originalText = toEncryptText.chars()
                 .mapToObj(i -> (char) i).toArray(Character[]::new);
         Character[] encryptedText = new Character[originalText.length];
-
+        int j = 0;
         for (int i = 0; i < toEncryptText.length(); ++i) {
-            encryptedText[i] = findCharInTable(originalText[i], keyArr[i]);
+            if (originalText[i].equals(' ') || originalText[i].equals('\n')) {
+                encryptedText[i] = originalText[i];
+                ++j;
+            }
+            else {
+                encryptedText[i] = findCharInTable(originalText[i], keyArr[i - j]);
+            }
         }
 
         sb = new StringBuilder();
@@ -50,9 +58,9 @@ public class EncryptVizhiner implements Algorithm {
 
     @Override
     public Character findCharInTable(Character str, Character column) {
-        if (str.equals(' ') || str.equals('\n')) {
+       /* if (str.equals(' ') || str.equals('\n')) {
             return str;
-        }
+        }*/
 
         int indexString = 0;
         int indexColumn = 0;

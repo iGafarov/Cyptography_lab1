@@ -28,8 +28,15 @@ public class DecryptVizhiner implements Algorithm {
                 .mapToObj(i -> (char) i).toArray(Character[]::new);
         Character[] decryptedText = new Character[originalText.length];
 
+        int j = 0;
         for (int i = 0; i < toDecryptText.length(); ++i) {
-            decryptedText[i] = findCharInTable(originalText[i], keyArr[i]);
+            if (originalText[i].equals(' ') || originalText[i].equals('\n')) {
+                decryptedText[i] = originalText[i];
+                ++j;
+            }
+            else {
+                decryptedText[i] = findCharInTable(originalText[i], keyArr[i - j]);
+            }
         }
 
         StringBuilder sb = new StringBuilder();
@@ -40,19 +47,14 @@ public class DecryptVizhiner implements Algorithm {
         FileService.createFile(parameters.get(InputParametersPattern.RESULT_TEXT), sb.toString());
     }
 
-    //TODO обработка пробелов
     @Override
     public Character findCharInTable(Character letter, Character column) {
-        if (letter.equals(' ') || letter.equals('\n')) {
-            return letter;
-        }
-
         int indexString = 0;
         int indexColumn = 0;
 
         Character letterTmp = Character.toUpperCase(letter);
         for (int i = 0; i < vizhinerTable.length; ++i) {
-            if (vizhinerTable[0][i].equals(column)) indexColumn = i;
+            if (vizhinerTable[0][i].equals(Character.toUpperCase(column))) indexColumn = i;
         }
         for (int j = 0; j < vizhinerTable.length; ++j) {
             if (vizhinerTable[j][indexColumn].equals(letterTmp)) indexString = j;

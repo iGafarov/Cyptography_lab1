@@ -8,5 +8,4 @@ public class Constants {
             , 'Ю', 'Я'};
     public static final String RUS = "rus";
     public static final String ENG = "eng";
-    public static final String KEY_PATH_ENCRYPT = "C:\\Users\\Искандер\\Desktop\\key.txt";
 }

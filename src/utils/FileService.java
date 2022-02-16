@@ -8,7 +8,6 @@ public class FileService {
 
     public static String readFile(String filePath) {
         String text = null;
-        StringBuilder stringBuilder = new StringBuilder();
         try {
             text = Files.lines(Paths.get(filePath)).reduce("", (a,b) -> a + "\n" + b);
         } catch (IOException e) {

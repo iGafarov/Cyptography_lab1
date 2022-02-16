@@ -24,10 +24,12 @@ public class EncryptVizhiner implements Algorithm {
     @Override
     public void execute() {
         StringBuilder sb = new StringBuilder();
-        if (language.equals("eng"))
+        if (language.equals(Constants.ENG)) {
             sb.append('A'); // English 'A' (65)
-        else
+        }
+        else {
             sb.append('А'); // Russian 'A' (1040)
+        }
         String keyString = sb.append(toEncryptText, 0, toEncryptText.length() - 1).toString()
                 .replace(" ", "")
                 .replace("\n", "");
@@ -54,7 +56,7 @@ public class EncryptVizhiner implements Algorithm {
         }
 
         FileService.createFile(parameters.get(InputParametersPattern.RESULT_TEXT), sb.toString());
-        FileService.createFile(Constants.KEY_PATH_ENCRYPT, keyString);
+        FileService.createFile(parameters.get(InputParametersPattern.SAVE_KEY), keyString);
     }
 
     @Override

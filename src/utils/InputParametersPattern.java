@@ -22,6 +22,11 @@ public enum InputParametersPattern {
         public String getPattern() {
             return "-key|-k";
         }
+    }, SAVE_KEY {
+        @Override
+        public String getPattern() {
+            return "-save_key|-sk";
+        }
     };
 
     public abstract String getPattern();
